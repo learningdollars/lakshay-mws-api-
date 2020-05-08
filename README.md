@@ -4,7 +4,7 @@ This project is an implementation of Amazon's MWS API in javascript/ Node.js to 
 # Getting Started
 
 ## Requirements
-Before starting make sure you have the following installed in your system: 
+Before starting make sure you have the following installed on your system: 
 * Node 6+
 * Git
 
