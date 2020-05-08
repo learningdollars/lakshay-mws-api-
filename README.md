@@ -10,6 +10,7 @@ Before starting make sure you have the following installed in your system:
 
 ## Common Setup
 Step 1. Clone this repository
+``` git clone https://github.com/learningdollars/lakshay-mws-api-.git ```
 
 Step 2. ``` cd /lakshay-mws-api- ```
 
@@ -20,3 +21,5 @@ Step 4. Run the app
 ``` node server.js ```
 
 ### The app will start running on port 3000 by default
+
+# Final Look after everything is set
