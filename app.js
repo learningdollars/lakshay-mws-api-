@@ -29,7 +29,7 @@ exports.RequestReports = class RequestReports {
 
 }
 
-
+/*Only the latest settlement report is fetched irrespective of the dates entered, as these are scheduled by amazon*/
 const getReportList = async() => {
 	try {
 		HelperReport.helper[4].forEach(async report => {
