@@ -5,8 +5,8 @@ This project is an implementation of Amazon's MWS API in javascript/ Node.js to 
 
 ## Requirements
 Before starting make sure you have the following installed in your system: 
-Node 6+
-Git
+* Node 6+
+* Git
 
 ## Common Setup
 Step 1. Clone this repository
@@ -15,3 +15,8 @@ Step 2. ``` cd /lakshay-mws-api- ```
 
 Step 3. Install all the dependencies
 ``` npm install --save ```
+
+Step 4. Run the app 
+``` node server.js ```
+
+### The app will start running on port 3000 by default
