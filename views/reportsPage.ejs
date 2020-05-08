@@ -1,0 +1,229 @@
+<html>
+   <head>
+      <title>Reports page</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <style>
+         .stylethefields{
+         text-align: center;
+         margin-top: 1% !important;
+         font-weight: bold;
+         }
+         .tablestyling{
+         margin-left:2% !important;
+         margin-right: 2% !important;
+         }
+         .downloadLinks{
+         margin-top:1%;
+         margin-bottom: 1%;
+         }
+      </style>
+      <script>
+         //script to download report as csv
+         function download_table_as_csv(table_id) {
+         
+         var rows = document.querySelectorAll('table#' + table_id + ' tr');
+         
+         var csv = [];
+         for (var i = 0; i < rows.length; i++) {
+         var row = [], cols = rows[i].querySelectorAll('td, th');
+         for (var j = 0; j < cols.length; j++) {
+          
+          var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+         
+          data = data.replace(/"/g, '""');
+         
+          row.push('"' + data + '"');
+         }
+         csv.push(row.join(';'));
+         }
+         var csv_string = csv.join('\n');
+         // Download it
+         var filename = 'export_' + table_id + '_' + new Date().toLocaleDateString() + '.csv';
+         var link = document.createElement('a');
+         link.style.display = 'none';
+         link.setAttribute('target', '_blank');
+         link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+         link.setAttribute('download', filename);
+         document.body.appendChild(link);
+         link.click();
+         document.body.removeChild(link);
+         }
+      </script>
+   </head>
+   <body>
+      <h2 class="stylethefields">All your reports will be displayed here</h2>
+      </div>
+      <h3 class= "stylethefields">Inventory Report</h3>
+      <% if(!inventorydata){ %>
+      <p class = 'stylethefields'>Inventory is empty</p>
+      <% }else{ %>
+      <div class = " table-responsive tablestyling">
+         <a href="#"  class= "downloadLinks btn btn-default btn-primary"  onclick="download_table_as_csv('inventorytable');">Download Report as CSV</a>
+         <table class="table table-hover" id="inventorytable">
+            <thead>
+               <tr>
+                  <th>Item Name</th>
+                  <th>Listing ID</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Product ID</th>
+                  <th>MRP</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% for(var i = 0; i< inventorydata.length; i++){ %>
+               <tr>
+                  <td><%= inventorydata[i]['item-name'] %></td>
+                  <td><%= inventorydata[i]['listing-id'] %></td>
+                  <td><%= inventorydata[i]['price'] %></td>
+                  <td><%= inventorydata[i]['quantity'] %></td>
+                  <td><%= inventorydata[i]['product-id'] %></td>
+                  <td><%= inventorydata[i]['maximum-retail-price'] %></td>
+               </tr>
+               <% } %>
+            </tbody>
+         </table>
+      </div>
+      <%}%>
+      <hr>
+      <h3 class= "stylethefields">Order Report</h3>
+      <% if(!orderdata){ %>
+      <p class = 'stylethefields'>No Orders found</p>
+      <% }else{ %>
+      <div class = " table-responsive tablestyling">
+         <a href="#"  class= "downloadLinks btn btn-default btn-primary"  onclick="download_table_as_csv('ordertable');">Download Report as CSV</a>
+         <table class="table table-hover" id = "ordertable">
+            <thead>
+               <tr>
+                  <th>Poduct Name</th>
+                  <th>Order ID</th>
+                  <th>Order Item ID</th>
+                  <th>Quantity Purchased</th>
+                  <th>Buyer Email</th>
+                  <th>Currency</th>
+                  <th>Item Price</th>
+                  <th>Item Tax</th>
+                  <th>Shipping Price</th>
+                  <th>Shipping Tax</th>
+                  <th>Payment Method Fee</th>
+                  <th>Shipping City</th>
+                  <th>Shipping State</th>
+                  <th>Ship Postal Code</th>
+                  <th>Shipping Country</th>
+                  <th>Purchase Date</th>
+                  <th>Payments Date</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% for(var i = 0; i< orderdata.length; i++){ %>
+               <tr>
+                  <td><%= orderdata[i]['product-name'] %></td>
+                  <td><%= orderdata[i]['order-id'] %></td>
+                  <td><%= orderdata[i]['order-item-id'] %></td>
+                  <td><%= orderdata[i]['quantity-purchased'] %></td>
+                  <td><%= orderdata[i]['buyer-email'] %></td>
+                  <td><%= orderdata[i]['currency'] %></td>
+                  <td><%= orderdata[i]['item-price'] %></td>
+                  <td><%= orderdata[i]['item-tax'] %></td>
+                  <td><%= orderdata[i]['shipping-price'] %></td>
+                  <td><%= orderdata[i]['shipping-tax'] %></td>
+                  <td><%= orderdata[i]['payment-method-fee'] %></td>
+                  <td><%= orderdata[i]['ship-city'] %></td>
+                  <td><%= orderdata[i]['ship-state'] %></td>
+                  <td><%= orderdata[i]['ship-postal-code'] %></td>
+                  <td><%= orderdata[i]['ship-country'] %></td>
+                  <td><%= orderdata[i]['purchase-date'] %></td>
+                  <td><%= orderdata[i]['payments-date'] %></td>
+               </tr>
+               <% } %>
+            </tbody>
+         </table>
+      </div>
+      <%}%>
+      <hr>
+      <h3 class= "stylethefields">Performance Report</h3>
+      <% if(!performancedata){ %>
+      <p class = 'stylethefields'>No Performance Reports found</p>
+      <% }else{ %>
+      <div class = " table-responsive tablestyling">
+         <a href="#"  class= "downloadLinks btn btn-default btn-primary"  onclick="download_table_as_csv('performancetable');">Download Report as CSV</a>
+         <table class="table table-hover" id = "performancetable">
+            <thead>
+               <tr>
+                  <th>Order Defect Rate Status</th>
+                  <th>Order Cancellation Rate Status</th>
+                  <th>Late Shipment Rate Status</th>
+                  <th>Policy Violation Status</th>
+                  <th>On Time Delivery Status</th>
+                  <th>Valid Tracking Rate Status</th>
+                  <th>Contact Response Time Status</th>
+                  <th>Return Dissatisfaction Rate</th>
+                  <th>Product Authenticity Status</th>
+                  <th>Product Safety Status</th>
+                  <th>Listing Policy Status</th>
+                  <th>Intellectual Property Status</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['orderDefectRate']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['orderCancellationRate']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['lateShipmentRate']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['policyViolation']['status']%></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['onTimeDelivery']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['validTrackingRate']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['contactResponseTime']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['returnDissatisfactionRate']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['productAuthenticityStatus']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['productSafetyStatus']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['listingPolicyStatus']['status'] %></td>
+                  <td><%= performancedata['sellerPerformanceReports']['sellerPerformanceReport']['performanceChecklist']['intellectualPropertyStatus']['status'] %></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <%}%>
+      <hr>
+      <h3 class= "stylethefields">Amazon Pay Report</h3>
+      <% if(!amazonpaydata || amazonpaydata.length == 0){ %>
+      <p class = 'stylethefields'>No Amazon Pay Reports found</p>
+      <% }else{ %>
+      <p><%= JSON.stringify(amazonpaydata)%></p>
+      <%}%>
+      <hr>
+      <h3 class= "stylethefields">Settlement Report</h3>
+      <% if(!settlementdata){ %>
+      <p class = 'stylethefields'>No Settlement Data found</p>
+      <% }else{ %>
+      <div class = " table-responsive tablestyling">
+         <a href="#"  class= "downloadLinks btn btn-default btn-primary"  onclick="download_table_as_csv('settlementtable');">Download Report as CSV</a>
+         <table class="table table-hover" id = "settlementtable">
+            <thead>
+               <tr>
+                  <th>Amazon Settlement ID</th>
+                  <th>Total Amount</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Deposit Date</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><%= settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['AmazonSettlementID'] %></td>
+                  <td><%= settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['TotalAmount']['Value'] + " " + settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['TotalAmount']['currency'] %> </td>
+                  <td><%= settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['StartDate'] %></td>
+                  <td><%= settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['EndDate'] %></td>
+                  <td><%= settlementdata['AmazonEnvelope']['Message']['SettlementReport']['SettlementData']['DepositDate'] %></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <%}%>
+      <div>
+         <h3 class = "stylethefields"> If you feel some reports have rendered incompletely, please REFRESH the page!!</h3>
+      </div>
+   </body>
+</html>
