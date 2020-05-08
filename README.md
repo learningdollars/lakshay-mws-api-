@@ -24,6 +24,21 @@ Step 4. Run the app
 
 # Final Look after everything is set: 
 <p align = "center" >
-<img src="https://i.ibb.co/B6s9MkN/Screenshot-421.png" />
+  <p>Fill your credentials and hit Generate Reports </p>
+  <img src="https://i.ibb.co/B6s9MkN/Screenshot-421.png" />
+  <br>
+  <p>Wait till your reports are fetched</p>
+  <img src="https://i.ibb.co/4m6ncfB/Screenshot-419.png" />
+  <br>
+  <p>This is how reports will be displayed(you will also have the option to download each report as csv) </p>
+  <img src="https://i.ibb.co/q51yrR3/Screenshot-422.png" />
+  <br>
+  <p>If you see this screen, two possibilities arise:
+  <li>The seller does not really have any reports</li>
+  <li>The credentials you entered are wrong</li>
+  </p>
+  <p>To be sure, check the console for the error</p>
+  <img src="https://i.ibb.co/vzFryQS/Screenshot-420.png" />
+  
 </p>
 
