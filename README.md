@@ -23,5 +23,6 @@ Step 4. Run the app
 ### The app will start running on port 3000 by default
 
 # Final Look after everything is set: 
+<img src="https://i.ibb.co/B6s9MkN/Screenshot-421.png" />
 
 
